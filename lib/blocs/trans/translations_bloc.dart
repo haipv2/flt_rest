@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flt_rest/blocs/bloc_helper/bloc_event_state.dart';
+import 'package:flt_rest/commons/const.dart';
 import 'package:flutter/material.dart';
 import '../../repos/preferences.dart';
 import '../bloc_provider.dart';
@@ -37,7 +38,13 @@ class TransBloc extends BlocEventStateBase<TransEvent, TransState> {
 
   @override
   Stream<TransState> eventhandler(TransEvent event, TransState currentState) {
-    // TODO: implement eventhandler
     return null;
   }
+
+  void setSeeTips() async {
+    //save see tips
+    await preferences.setPreferredBool(SEEN, true);
+  }
+
+
 }

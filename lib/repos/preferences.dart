@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flt_rest/commons/const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String _storageKey = 'Appli_';
@@ -32,6 +33,19 @@ class Preferences {
     return result;
   }
 
+  //get seen
+  Future<bool> getBool(String seen) async{
+    final SharedPreferences prefs = await _prefs;
+    bool result =  prefs.getBool(SEEN);
+    return result;
+
+  }
+
+  Future<bool> setPreferredBool(String key, bool value) async {
+    final SharedPreferences prefs = await _prefs;
+    return prefs.setBool('key', value);
+  }
+
   String get defaultLanguage => _defaultLanguage;
 
   //SINGLETON
@@ -42,4 +56,5 @@ class Preferences {
   }
 
   Preferences._internal();
+
 }
