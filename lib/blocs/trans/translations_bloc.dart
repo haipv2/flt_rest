@@ -43,7 +43,7 @@ class TransBloc extends BlocEventStateBase<TransEvent, TransState> {
 
   void setSeeTips() async {
     //save see tips
-    await preferences.setPreferredBool(SEEN, true);
+    await preferences.setPreferredBool(IS_FIRST_TIME, true);
   }
 
 

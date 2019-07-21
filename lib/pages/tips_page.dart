@@ -1,10 +1,11 @@
 import 'package:flt_rest/blocs/bloc_provider.dart';
 import 'package:flt_rest/blocs/trans/translations_bloc.dart';
+import 'package:flt_rest/commons/app_style.dart';
 import 'package:flt_rest/commons/const.dart';
-import 'package:flt_rest/commons/text_style.dart';
 import 'package:flt_rest/widgets/tips.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+
 import '../widgets/custom_flat_button.dart';
 
 class TipsPage extends StatefulWidget {
@@ -28,7 +29,26 @@ class _TipsPageState extends State<TipsPage> {
           size: 100,
         ),
         title: 'Language',
-        desc: 'Select your language'),
+        desc: 'Select your language',
+        extraWidget: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            RaisedButton(
+              child: Text(
+                'Tiếng Việt',
+                style: txtDisableStyle,
+              ),
+              onPressed: () {},
+            ),
+            RaisedButton(
+              color: Colors.blueAccent,
+              child: Text(
+                'ENGLISH',
+              ),
+              onPressed: () {},
+            )
+          ],
+        )),
     Tips(
         child: Icon(
           Icons.info,
@@ -57,7 +77,7 @@ class _TipsPageState extends State<TipsPage> {
                       activeSize: 8.0),
                 ),
                 control: SwiperControl(
-                  iconNext: Icons.arrow_downward,
+                  iconNext: Icons.arrow_forward,
                   iconPrevious: Icons.arrow_back,
                 ),
                 children: _buildTipsPage(context, tipsPage, transBloc)),
@@ -68,26 +88,9 @@ class _TipsPageState extends State<TipsPage> {
   List<Widget> _buildTipsPage(
       BuildContext context, List<Tips> tipsPage, TransBloc transBloc) {
     List<Widget> result = [];
-    result.add(Container(
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            RaisedButton(
-              child: Text('EN'),
-              onPressed: () {},
-            ),
-            RaisedButton(
-              child: Text('VI'),
-              onPressed: () {},
-            )
-          ],
-        ),
-      ),
-    ));
     for (var page in tipsPage) {
       result.add(Container(
-          color: Colors.orangeAccent,
+          color: Colors.lime,
           child: ListView(children: <Widget>[
             Padding(
               padding: const EdgeInsets.only(top: 70.0),
@@ -110,6 +113,9 @@ class _TipsPageState extends State<TipsPage> {
                   child: RichText(
                       text:
                           TextSpan(text: page.desc, style: tipsPageDescStyle)),
+                ),
+                Container(
+                  child: page.extraWidget,
                 )
               ],
             )

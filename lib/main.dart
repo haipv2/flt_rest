@@ -1,24 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'application.dart';
 import 'blocs/trans/global_translations.dart';
+import 'commons/const.dart';
+import 'repos/preferences.dart';
 
 void main() async {
   // Initialize the translations module
   await allTranslations.init();
+  preferences.getBool(IS_FIRST_TIME).then((value) {
+    bool isFirstTime = value ?? true;
+    runApp(Application(isFirstTime));
+  });
 
-  runApp(Application());
 }
-
-//class MyApp extends StatelessWidget {
-//  @override
-//  Widget build(BuildContext context) {
-//    return MaterialApp(
-//      theme: ThemeData(
-//        primarySwatch: Colors.white
-//      ),
-////      home: HomePage(),
-//    );
-//  }
-//}

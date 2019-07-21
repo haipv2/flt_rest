@@ -36,7 +36,7 @@ class Preferences {
   //get seen
   Future<bool> getBool(String seen) async{
     final SharedPreferences prefs = await _prefs;
-    bool result =  prefs.getBool(SEEN);
+    bool result =  prefs.getBool(IS_FIRST_TIME);
     return result;
 
   }
