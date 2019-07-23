@@ -2,12 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:flt_rest/commons/const.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import '../../repos/preferences.dart';
 
-const List<String> _supportedLang = ['en', 'vi'];
-const String _defaultLang = 'vi';
+const List<String> _supportedLang = [ENGLISH_CODE, VIETNAM_CODE];
+const String _defaultLang = ENGLISH_CODE;
 
 class GlobalTrans {
   Locale _locale;

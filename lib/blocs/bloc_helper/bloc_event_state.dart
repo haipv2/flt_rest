@@ -51,5 +51,7 @@ abstract class BlocEventStateBase<BlocEvent, BlocState> implements BlocBase {
 
   ///
   @override
-  void dispose() {}
+  void dispose() {
+
+  }
 }

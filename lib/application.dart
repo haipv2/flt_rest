@@ -1,5 +1,6 @@
 import 'package:flt_rest/blocs/trans/translations_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'blocs/auth/auth_bloc.dart';
 import 'blocs/bloc_provider.dart';
@@ -9,6 +10,7 @@ import 'pages/init_page.dart';
 import 'pages/splash_page.dart';
 import 'pages/tips_page.dart';
 import 'repos/preferences.dart';
+import 'services/trans_services.dart';
 
 class Application extends StatefulWidget {
   final bool isFirstTime;
@@ -39,9 +41,19 @@ class _ApplicationState extends State<Application> {
           builder: (BuildContext context, AsyncSnapshot<Locale> snapshot) {
             return MaterialApp(
               title: 'Restaurant-Drink',
+
               theme: ThemeData(
                 primarySwatch: Colors.orange,
               ),
+
+              // multi lang
+              locale: snapshot.data ?? allTranslations.locale,
+              localizationsDelegates: [
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+              supportedLocales: allTranslations.supportedLocales(),
+
               routes: {
                 TIPS_PAGE: (BuildContext context) => InitPage(),
                 HOME_PAGE: (BuildContext context) => SplashPage(),

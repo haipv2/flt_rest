@@ -8,9 +8,10 @@ import 'repos/preferences.dart';
 void main() async {
   // Initialize the translations module
   await allTranslations.init();
-  preferences.getBool(IS_FIRST_TIME).then((value) {
-    bool isFirstTime = value ?? true;
-    runApp(Application(isFirstTime));
-  });
+//  preferences.getBool(IS_FIRST_TIME).then((value) {
+//    bool isFirstTime = value ?? true;
+//    runApp(Application(isFirstTime));
+//  });
+  runApp(Application(true));
 
 }

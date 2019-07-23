@@ -1,13 +1,12 @@
 import 'dart:async';
 
 import 'package:flt_rest/blocs/bloc_helper/bloc_event_state.dart';
-import 'package:flt_rest/commons/const.dart';
 import 'package:flutter/material.dart';
 import '../../repos/preferences.dart';
-import '../bloc_provider.dart';
 import '../../services/trans_services.dart';
 import 'trans_event.dart';
 import 'trans_state.dart';
+import 'package:flt_rest/commons/const.dart';
 
 class TransBloc extends BlocEventStateBase<TransEvent, TransState> {
   StreamController<String> _langController =
@@ -27,18 +26,31 @@ class TransBloc extends BlocEventStateBase<TransEvent, TransState> {
 
   void setNewLanguage(String newLanguage) async {
     //save the selected language as new preference
-    await preferences.setPreferredLanguage(newLanguage);
+    var newLang = newLanguage.toString();
+    await preferences.setPreferredLanguage(newLang);
 
     //Notification the translation module about new language
-    await allTranslations.setNewLanguage(newLanguage);
+    await allTranslations.setNewLanguage(newLang);
 
-    _langController.sink.add(newLanguage);
+    _langController.sink.add(newLang);
     _localeController.sink.add(allTranslations.locale);
   }
 
   @override
-  Stream<TransState> eventhandler(TransEvent event, TransState currentState) {
-    return null;
+  Stream<TransState> eventhandler(
+      TransEvent event, TransState currentState) async* {
+    yield TransState.progressing(0);
+
+    // Simulate a call to the authentication server
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    yield TransState.changed();
+
+//    if (currentState.changing) {
+//      for (int i = 0; i < 100; i += 20) {
+//        yield TransState.progressing(i);
+//      }
+//    }
   }
 
   void setSeeTips() async {
@@ -46,5 +58,5 @@ class TransBloc extends BlocEventStateBase<TransEvent, TransState> {
     await preferences.setPreferredBool(IS_FIRST_TIME, true);
   }
 
-
+  TransBloc() : super(initState: TransState.changed());
 }

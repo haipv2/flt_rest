@@ -14,3 +14,4 @@ const tipsPageTitleStyle = TextStyle(
     fontFamily: "OpenSans");
 const btnEnableStyle = TextStyle(backgroundColor: Colors.blueAccent);
 const txtDisableStyle = TextStyle(color: Colors.grey);
+const txtEnableStyle = TextStyle(color: Colors.black);

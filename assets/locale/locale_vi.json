@@ -1,6 +1,12 @@
 {
-  "page": {
-    "title": "DAY LA TITLE",
-    "changeLanguage": "Chon VI"
+  "pages": {
+    "tips": {
+      "0":{"title": "Ten App",
+        "desc": "Chon tieng Viet",
+        "home": "Trang chu"},
+      "1":{"title": "Ten app1",
+        "desc": "chontieng viet 1",
+        "home": "Trang chu 1"}
+    }
   }
 }
