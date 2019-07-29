@@ -42,15 +42,15 @@ class TransBloc extends BlocEventStateBase<TransEvent, TransState> {
     yield TransState.progressing(0);
 
     // Simulate a call to the authentication server
-    await Future.delayed(const Duration(milliseconds: 500));
+    await Future.delayed(const Duration(milliseconds: 1000));
 
     yield TransState.changed();
 
-//    if (currentState.changing) {
-//      for (int i = 0; i < 100; i += 20) {
-//        yield TransState.progressing(i);
-//      }
-//    }
+    if (currentState.changing) {
+      for (int i = 0; i < 100; i += 20) {
+        yield TransState.progressing(i);
+      }
+    }
   }
 
   void setSeeTips() async {

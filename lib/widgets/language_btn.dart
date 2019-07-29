@@ -1,5 +1,4 @@
 import 'package:flt_rest/blocs/bloc_provider.dart';
-import 'package:flt_rest/blocs/trans/global_translations.dart';
 import 'package:flt_rest/blocs/trans/translations_bloc.dart';
 import 'package:flt_rest/commons/app_style.dart';
 import 'package:flt_rest/commons/const.dart';

@@ -13,9 +13,8 @@ import 'repos/preferences.dart';
 import 'services/trans_services.dart';
 
 class Application extends StatefulWidget {
-  final bool isFirstTime;
 
-  Application(this.isFirstTime );
+  Application();
 
   @override
   _ApplicationState createState() => _ApplicationState();
@@ -55,10 +54,11 @@ class _ApplicationState extends State<Application> {
               supportedLocales: allTranslations.supportedLocales(),
 
               routes: {
-                TIPS_PAGE: (BuildContext context) => InitPage(),
-                HOME_PAGE: (BuildContext context) => SplashPage(),
+                PAGE_INIT: (BuildContext context) => InitPage(),
+                PAGE_TIPS: (BuildContext context) => TipsPage(),
+                PAGE_HOME: (BuildContext context) => HomePage(),
               },
-              home: widget.isFirstTime ? TipsPage() : HomePage(),
+              home: InitPage(),
             );
           },
         ),

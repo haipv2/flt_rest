@@ -1,14 +1,13 @@
 import 'package:flt_rest/blocs/bloc_provider.dart';
 import 'package:flt_rest/blocs/bloc_widget/bloc_state_builder.dart';
-import 'package:flt_rest/blocs/trans/global_translations.dart';
 import 'package:flt_rest/blocs/trans/trans_event.dart';
 import 'package:flt_rest/blocs/trans/trans_state.dart';
 import 'package:flt_rest/blocs/trans/translations_bloc.dart';
 import 'package:flt_rest/commons/app_style.dart';
 import 'package:flt_rest/commons/const.dart';
+import 'package:flt_rest/services/trans_services.dart';
 import 'package:flt_rest/widgets/language_btn.dart';
 import 'package:flt_rest/widgets/pending.dart';
-import 'package:flt_rest/widgets/tips.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
@@ -20,15 +19,13 @@ class TipsPage extends StatefulWidget {
 }
 
 class _TipsPageState extends State<TipsPage> {
-//  TransBloc transBloc;
-
   @override
   void initState() {
     super.initState();
-//    transBloc = new TransBloc();
   }
 
   TransBloc transBloc;
+  GlobalKey<ScaffoldState> _tipScaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +41,7 @@ class _TipsPageState extends State<TipsPage> {
               return PendingPage();
             }
             return Scaffold(
+              key: _tipScaffoldKey,
               body: Swiper.children(
                   autoplay: false,
                   index: 0,
@@ -103,7 +101,7 @@ class _TipsPageState extends State<TipsPage> {
                               ? true
                               : false,
                       onPressed: () {
-                        transBloc.setNewLanguage(ENGLISH_CODE);
+                        changeLanguage(ENGLISH_CODE);
                       },
                     ),
                     LanguageBtn(
@@ -114,7 +112,7 @@ class _TipsPageState extends State<TipsPage> {
                               ? true
                               : false,
                       onPressed: () {
-                        transBloc.setNewLanguage(VIETNAM_CODE);
+                        changeLanguage(VIETNAM_CODE);
                       },
                     ),
                   ],
@@ -149,7 +147,7 @@ class _TipsPageState extends State<TipsPage> {
                       // retrieve bloc
                       transBloc.setSeeTips();
                     });
-                    Navigator.of(context).pushReplacementNamed(HOME_PAGE);
+                    Navigator.of(context).pushReplacementNamed(PAGE_HOME);
                   },
                   splashColor: Colors.black12,
                   borderColor: Colors.white,
@@ -163,10 +161,13 @@ class _TipsPageState extends State<TipsPage> {
     return result;
   }
 
-//  void changeLanguage() {
-//    final String otherLanguage =
-//        allTranslations.currentLanguage == VIET_NAM ? ENGLISH : VIET_NAM;
-//    transBloc.setNewLanguage(otherLanguage);
-//    transBloc.addEvent(TransEvent());
-//  }
+  void changeLanguage(String langCode) {
+    if (langCode == allTranslations.currentLanguage) {
+      _tipScaffoldKey.currentState
+          .showSnackBar(SnackBar(content: Text('dataSet')));
+      return;
+    }
+    transBloc.setNewLanguage(langCode);
+    transBloc.addEvent(TransEvent());
+  }
 }
