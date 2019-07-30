@@ -12,9 +12,8 @@ class InitPage extends StatefulWidget {
 }
 
 class _InitPageState extends State<InitPage> {
-
   InitBloc initBloc;
-
+//  var isFirstTime = checkFirstTime();
   @override
   void initState() {
     super.initState();
@@ -30,29 +29,33 @@ class _InitPageState extends State<InitPage> {
 
   @override
   Widget build(BuildContext context) {
-    var isFirstTime = preferences.getBool(IS_FIRST_TIME);
     return SafeArea(
-      child: Scaffold(
-        body: Container(
-          child: BlocEventStateBuilder<InitState>(
-            bloc: initBloc,
-            builder: (BuildContext context, InitState state){
-
-              if (state.isInited){
-                // init complete, move to another page
-                WidgetsBinding.instance.addPostFrameCallback((_){
-                  if (isFirstTime != null) {
+        child: Scaffold(
+      body: Container(
+        child: BlocEventStateBuilder<InitState>(
+          bloc: initBloc,
+          builder: (BuildContext context, InitState state) {
+            if (state.isInited) {
+              // init complete, move to another page
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                preferences.getBool(IS_FIRST_TIME).then((isFirstTime){
+                  if (isFirstTime==null || !isFirstTime) {
                     Navigator.of(context).pushReplacementNamed(PAGE_TIPS);
+                  }else {
+                    Navigator.of(context).pushReplacementNamed(PAGE_HOME);
                   }
-                  Navigator.of(context).pushReplacementNamed(PAGE_INIT);
+
                 });
-              }
-              return Text('... ${state.progress}');
-            },
-          ),
+              });
+            }
+            return Center(child: Text('Ingrogress... ${state.progress} %'));
+          },
         ),
-      )
-    );
+      ),
+    ));
+  }
+
+  static checkFirstTime () async{
+    return preferences.getBool(IS_FIRST_TIME);
   }
 }
-

@@ -42,7 +42,7 @@ class Preferences {
 
   Future<bool> setPreferredBool(String key, bool value) async {
     final SharedPreferences prefs = await _prefs;
-    return prefs.setBool('key', value);
+    return prefs.setBool(key, value);
   }
 
   String get defaultLanguage => _defaultLanguage;

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flt_rest/blocs/bloc_helper/bloc_event_state.dart';
 
 import 'init_event.dart';
@@ -17,8 +19,8 @@ class InitBloc extends BlocEventStateBase<InitEvent, InitState> {
     }
 
     if (event.type == InitEventType.start) {
-      for (int progress = 0; progress < 101; progress += 10) {
-        await Future.delayed(const Duration(milliseconds: 1000));
+      for (int progress = 0; progress < 101; progress ++) {
+        await Future.delayed(const Duration(milliseconds: 10));
         yield InitState.progressing(progress);
       }
     }

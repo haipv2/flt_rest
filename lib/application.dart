@@ -1,5 +1,6 @@
 import 'package:flt_rest/blocs/trans/translations_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'blocs/auth/auth_bloc.dart';
@@ -27,6 +28,10 @@ class _ApplicationState extends State<Application> {
   void initState() {
     super.initState();
     transBloc = TransBloc();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
   }
 
   @override

@@ -8,3 +8,6 @@ const String ENGLISH_CODE ='en';
 const String VIETNAM_TXT ='Tiếng Việt';
 const String VIETNAM_CODE ='vi';
 const APP_LANGUAGE = 'fltRest_';
+
+//table
+const USERS_TBL = 'users';
