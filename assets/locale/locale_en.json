@@ -8,5 +8,9 @@
         "desc": "Tap this button to select 'English'",
         "home": "Home Page"}
     }
-  }
+  },
+  "txtMenu": "Menu",
+  "txtBook": "Book",
+  "txtLanguage":"Language"
+
 }

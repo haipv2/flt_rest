@@ -5,8 +5,10 @@ import 'package:flt_rest/blocs/trans/trans_state.dart';
 import 'package:flt_rest/blocs/trans/translations_bloc.dart';
 import 'package:flt_rest/commons/app_style.dart';
 import 'package:flt_rest/commons/const.dart';
-import 'package:flt_rest/services/trans_services.dart';
+import 'package:flt_rest/blocs/global_bloc.dart';
+import 'package:flt_rest/mixin/AppUtils.dart';
 import 'package:flt_rest/widgets/language_btn.dart';
+import 'package:flt_rest/widgets/language_widget.dart';
 import 'package:flt_rest/widgets/pending.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -18,7 +20,7 @@ class TipsPage extends StatefulWidget {
   _TipsPageState createState() => _TipsPageState();
 }
 
-class _TipsPageState extends State<TipsPage> {
+class _TipsPageState extends State<TipsPage> with AppUtils {
   @override
   void initState() {
     super.initState();
@@ -30,7 +32,7 @@ class _TipsPageState extends State<TipsPage> {
   @override
   Widget build(BuildContext context) {
     transBloc = BlocProvider.of<TransBloc>(context);
-    final String newLanguage = allTranslations.currentLanguage == VIETNAM_CODE
+    final String newLanguage = globalBloc.currentLanguage == VIETNAM_CODE
         ? VIETNAM_CODE
         : ENGLISH_CODE;
     return SafeArea(
@@ -74,7 +76,7 @@ class _TipsPageState extends State<TipsPage> {
             children: <Widget>[
               Center(
                 child: Text(
-                  allTranslations.text('pages.tips.0.title'),
+                  globalBloc.text('pages.tips.0.title'),
                   softWrap: true,
                   textAlign: TextAlign.center,
                   style: tipsPageTitleStyle,
@@ -86,38 +88,10 @@ class _TipsPageState extends State<TipsPage> {
               Align(
                 child: RichText(
                     text: TextSpan(
-                        text: allTranslations.text('pages.tips.0.desc'),
+                        text: globalBloc.text('pages.tips.0.desc'),
                         style: tipsPageDescStyle)),
               ),
-              Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    LanguageBtn(
-                      langTxt: ENGLISH_TXT,
-                      langCode: ENGLISH_CODE,
-                      isSelected:
-                          allTranslations.currentLanguage == ENGLISH_CODE
-                              ? true
-                              : false,
-                      onPressed: () {
-                        changeLanguage(ENGLISH_CODE);
-                      },
-                    ),
-                    LanguageBtn(
-                      langTxt: VIETNAM_TXT,
-                      langCode: VIETNAM_CODE,
-                      isSelected:
-                          allTranslations.currentLanguage == VIETNAM_CODE
-                              ? true
-                              : false,
-                      onPressed: () {
-                        changeLanguage(VIETNAM_CODE);
-                      },
-                    ),
-                  ],
-                ),
-              )
+              LanguageSettingWidget(),
             ],
           )
         ])));
@@ -138,7 +112,7 @@ class _TipsPageState extends State<TipsPage> {
               padding:
                   const EdgeInsets.only(top: 50.0, right: 15.0, left: 15.0),
               child: CustomFlatButton(
-                  title: allTranslations.text('pages.tips.0.desc'),
+                  title: globalBloc.text('pages.tips.0.desc'),
                   fontSize: 30,
                   fontWeight: FontWeight.w700,
                   textColor: Colors.black87,
@@ -159,15 +133,5 @@ class _TipsPageState extends State<TipsPage> {
       ),
     ));
     return result;
-  }
-
-  void changeLanguage(String langCode) {
-    if (langCode == allTranslations.currentLanguage) {
-      _tipScaffoldKey.currentState
-          .showSnackBar(SnackBar(content: Text('dataSet')));
-      return;
-    }
-    transBloc.setNewLanguage(langCode);
-    transBloc.addEvent(TransEvent());
   }
 }

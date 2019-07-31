@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flt_rest/blocs/bloc_helper/bloc_event_state.dart';
 import 'package:flutter/material.dart';
 import '../../repos/preferences.dart';
-import '../../services/trans_services.dart';
+import 'package:flt_rest/blocs/global_bloc.dart';
 import 'trans_event.dart';
 import 'trans_state.dart';
 import 'package:flt_rest/commons/const.dart';
@@ -30,10 +30,10 @@ class TransBloc extends BlocEventStateBase<TransEvent, TransState> {
     await preferences.setPreferredLanguage(newLang);
 
     //Notification the translation module about new language
-    await allTranslations.setNewLanguage(newLang);
+    await globalBloc.setNewLanguage(newLang);
 
     _langController.sink.add(newLang);
-    _localeController.sink.add(allTranslations.locale);
+    _localeController.sink.add(globalBloc.locale);
   }
 
   @override

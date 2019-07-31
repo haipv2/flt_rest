@@ -11,7 +11,7 @@ import 'pages/init_page.dart';
 import 'pages/splash_page.dart';
 import 'pages/tips_page.dart';
 import 'repos/preferences.dart';
-import 'services/trans_services.dart';
+import 'package:flt_rest/blocs/global_bloc.dart';
 
 class Application extends StatefulWidget {
 
@@ -45,18 +45,17 @@ class _ApplicationState extends State<Application> {
           builder: (BuildContext context, AsyncSnapshot<Locale> snapshot) {
             return MaterialApp(
               title: 'Restaurant-Drink',
-
               theme: ThemeData(
                 primarySwatch: Colors.orange,
               ),
 
               // multi lang
-              locale: snapshot.data ?? allTranslations.locale,
+              locale: snapshot.data ?? globalBloc.locale,
               localizationsDelegates: [
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
               ],
-              supportedLocales: allTranslations.supportedLocales(),
+              supportedLocales: globalBloc.supportedLocales(),
 
               routes: {
                 PAGE_INIT: (BuildContext context) => InitPage(),

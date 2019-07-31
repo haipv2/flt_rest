@@ -8,5 +8,8 @@
         "desc": "chontieng viet 1",
         "home": "Trang chu 1"}
     }
-  }
+  },
+  "txtMenu": "Chọn món",
+  "txtBook": "Đặt chỗ",
+  "txtLanguage":"Ngôn ngữ"
 }

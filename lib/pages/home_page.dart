@@ -1,4 +1,11 @@
+import 'package:flt_rest/blocs/bloc_provider.dart';
+import 'package:flt_rest/blocs/global_bloc.dart';
+import 'package:flt_rest/blocs/home/home_bloc.dart';
+import 'package:flt_rest/blocs/trans/translations_bloc.dart';
 import 'package:flt_rest/models/shop.dart';
+import 'package:flt_rest/widgets/language_widget.dart';
+import 'package:flt_rest/widgets/settings_icon.dart';
+import 'package:flt_rest/widgets/shop_widget_item.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -8,13 +15,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   HomeBloc bloc;
 
   @override
   void initState() {
     super.initState();
+    bloc = new HomeBloc();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,23 +32,35 @@ class _HomePageState extends State<HomePage> {
           style: TextStyle(fontFamily: 'indie flower'),
         ),
       ),
-      drawer: myPageDrawer(),
+      drawer: myPageDrawer(context),
       body: Container(
         child: StreamBuilder<List<Shop>>(
-            stream: bloc
-            builder:(BuilderContext context, AsyncSnapshot snapshot){
-
-      }
-        ),
+            stream: bloc.shops,
+            builder:
+                (BuildContext context, AsyncSnapshot<List<Shop>> snapshot) {
+              if (!snapshot.hasData) {
+                return Container();
+              }
+              return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2, childAspectRatio: 1.0),
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ShopItem(shop: snapshot.data[index]);
+                  });
+            }),
       ),
     );
   }
 
-  Widget myPageDrawer() {
+  Widget myPageDrawer(BuildContext context) {
+    TransBloc _transBloc = BlocProvider.of<TransBloc>(context);
     Size size = MediaQuery.of(context).size;
 //    String imageUrl = widget.user.gender == 1
 //        ? 'assets/images/male.png'
 //        : 'assets/images/female.png';
+    String txtSetting = globalBloc.text('txtSetting');
+    String txtLanguage = globalBloc.text('txtLanguage');
     return SizedBox(
       width: size.width * 3 / 4,
       child: Drawer(
@@ -64,15 +84,14 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 ListTile(
-                  leading: const Icon(Icons.account_circle),
-                  title: Text('User\'s info'),
+                  leading: const Icon(Icons.language),
+                  title: Text(txtLanguage),
                   onTap: () {
-//                    Navigator.of(context)
-//                        .push(MaterialPageRoute(builder: (context) {
-//                      return userInfo.UserInfo(widget.user, imageUrl);
-//                    }
-//                    )
-//                    );
+                    showDialog(
+                        context: context,
+                        builder: (_) {
+                          return LanguageSettingWidget();
+                        });
                   },
                 ),
                 ListTile(

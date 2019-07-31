@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
-
+import 'package:flt_rest/repos/preferences.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import '../repos/preferences.dart';
 
 const List<String> _supportedLang = ['en', 'vi'];
 const String _defaultLang = 'vi';
@@ -120,4 +118,4 @@ class GlobalTrans {
   GlobalTrans._internal();
 }
 
-GlobalTrans allTranslations = GlobalTrans();
+GlobalTrans globalBloc = GlobalTrans();
