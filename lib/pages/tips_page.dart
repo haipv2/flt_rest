@@ -103,11 +103,6 @@ class _TipsPageState extends State<TipsPage> with AppUtils {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Icon(
-              Icons.play_arrow,
-              size: 250,
-              color: Colors.indigoAccent,
-            ),
             Padding(
               padding:
                   const EdgeInsets.only(top: 50.0, right: 15.0, left: 15.0),
