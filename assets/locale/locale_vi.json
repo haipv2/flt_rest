@@ -1,15 +1,20 @@
 {
   "pages": {
     "tips": {
-      "0":{"title": "Ten App",
+      "0": {
+        "title": "Ten App",
         "desc": "Chon tieng Viet",
-        "home": "Trang chu"},
-      "1":{"title": "Ten app1",
+        "home": "Trang chu"
+      },
+      "1": {
+        "title": "Ten app1",
         "desc": "chontieng viet 1",
-        "home": "Trang chu 1"}
+        "home": "Trang chu 1"
+      }
     }
   },
   "txtMenu": "Chọn món",
   "txtBook": "Đặt chỗ",
-  "txtLanguage":"Ngôn ngữ"
+  "txtLanguage": "Ngôn ngữ",
+  "txtBack": "Quay lại"
 }

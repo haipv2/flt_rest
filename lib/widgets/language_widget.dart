@@ -12,6 +12,9 @@ import 'package:flutter/material.dart';
 import 'language_btn.dart';
 
 class LanguageSettingWidget extends StatelessWidget with AppUtils {
+
+  LanguageSettingWidget();
+
   @override
   Widget build(BuildContext context) {
     TransBloc transBloc = BlocProvider.of<TransBloc>(context);

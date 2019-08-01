@@ -1,3 +1,4 @@
+
 const String IS_FIRST_TIME = 'seen';
 final String PAGE_HOME ='/home';
 final String PAGE_TIPS ='/tips';

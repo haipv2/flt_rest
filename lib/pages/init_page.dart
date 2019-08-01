@@ -13,6 +13,7 @@ class InitPage extends StatefulWidget {
 
 class _InitPageState extends State<InitPage> {
   InitBloc initBloc;
+
 //  var isFirstTime = checkFirstTime();
   @override
   void initState() {
@@ -30,21 +31,20 @@ class _InitPageState extends State<InitPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      body: Container(
+      child: Container(
+        color: Colors.white,
         child: BlocEventStateBuilder<InitState>(
           bloc: initBloc,
           builder: (BuildContext context, InitState state) {
             if (state.isInited) {
               // init complete, move to another page
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                preferences.getBool(IS_FIRST_TIME).then((isFirstTime){
-                  if (isFirstTime==null || !isFirstTime) {
+                preferences.getBool(IS_FIRST_TIME).then((isFirstTime) {
+                  if (isFirstTime == null || !isFirstTime) {
                     Navigator.of(context).pushReplacementNamed(PAGE_TIPS);
-                  }else {
+                  } else {
                     Navigator.of(context).pushReplacementNamed(PAGE_HOME);
                   }
-
                 });
               });
             }
@@ -52,10 +52,10 @@ class _InitPageState extends State<InitPage> {
           },
         ),
       ),
-    ));
+    );
   }
 
-  static checkFirstTime () async{
+  static checkFirstTime() async {
     return preferences.getBool(IS_FIRST_TIME);
   }
 }

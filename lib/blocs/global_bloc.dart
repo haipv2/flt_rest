@@ -54,6 +54,8 @@ class GlobalTrans {
         _values = value;
         index++;
       }
+    } else {
+      return key;
     }
     return string;
   }
@@ -93,7 +95,7 @@ class GlobalTrans {
     }
 
     //set locale
-    if (language == ""){
+    if (language == "") {
       language = preferences.defaultLanguage;
     }
     _locale = Locale(language, "");

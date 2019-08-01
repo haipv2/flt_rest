@@ -1,7 +1,11 @@
+import 'package:flt_rest/blocs/bloc_widget/bloc_state_builder.dart';
+import 'package:flt_rest/blocs/shop/shop_bloc.dart';
+import 'package:flt_rest/blocs/shop/shop_state.dart';
 import 'package:flt_rest/models/shop.dart';
 import 'package:flutter/material.dart';
 
-import 'shop_area.dart';
+import 'pending.dart';
+import 'shop_detail.dart';
 
 class ShopItem extends StatefulWidget {
   final Shop shop;
@@ -13,6 +17,13 @@ class ShopItem extends StatefulWidget {
 }
 
 class _ShopItemState extends State<ShopItem> {
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,7 +34,7 @@ class _ShopItemState extends State<ShopItem> {
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) =>
-                    ShopArea(shop: widget.shop)));
+                    ShopDetail(shop: widget.shop)));
           },
         ),
       ),
