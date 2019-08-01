@@ -1,7 +1,6 @@
-import 'package:flt_rest/blocs/bloc_widget/bloc_state_builder.dart';
+import 'package:flt_rest/blocs/bloc_provider.dart';
 import 'package:flt_rest/blocs/shop/shop_bloc.dart';
 import 'package:flt_rest/blocs/shop/shop_event.dart';
-import 'package:flt_rest/blocs/shop/shop_state.dart';
 import 'package:flt_rest/models/shop.dart';
 import 'package:flutter/material.dart';
 
@@ -29,21 +28,41 @@ class _ShopDetailState extends State<ShopDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: BlocEventStateBuilder<ShopState>(
-        bloc: shopBloc,
-        builder: (BuildContext context, ShopState state) {
-          return Center(
-            child: Text('Shop Area -id: ${widget.shop.shopId}'),
-          );
-        },
-      ),
-      appBar: AppBar(
-        title: Text(widget.shop.shopName),
-      ),
-      drawer: ShopDrawer(),
-      bottomNavigationBar: ShopBottomBar(shop: widget.shop),
+    return BlocProvider<ShopBloc>(
+      bloc: shopBloc,
+      child: StreamBuilder(
+          stream: shopBloc.streamBottomBar,
+          initialData: shopBloc.defaultTabBar,
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: listTab().elementAt(snapshot.data),
+              appBar: AppBar(
+                title: Text(widget.shop.shopName),
+              ),
+              drawer: ShopDrawer(),
+              bottomNavigationBar: ShopBottomBar(
+                shop: widget.shop,
+                currentTab: snapshot.data,
+              ),
+            );
+          }),
     );
+  }
+
+  List<Widget> listTab() {
+    return <Widget>[
+      Container(),
+      Container(
+        child: Center(
+          child: Text('tab1'),
+        ),
+      ),
+      Container(
+        child: Center(
+          child: Text('tab2'),
+        ),
+      ),
+    ];
   }
 }

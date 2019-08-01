@@ -11,7 +11,7 @@ class ShopBloc extends BlocEventStateBase<ShopEvent, ShopState> {
         );
 
   BehaviorSubject<int> _streamBottomBarCtl = BehaviorSubject<int>();
-  Observable<int> get streamBottomNBar => _streamBottomBarCtl.stream;
+  Observable<int> get streamBottomBar => _streamBottomBarCtl.stream;
   Function(int) get selectTab => _streamBottomBarCtl.sink.add;
 
   int get defaultTabBar => 1;
