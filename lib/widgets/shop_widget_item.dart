@@ -1,11 +1,7 @@
-import 'package:flt_rest/blocs/bloc_widget/bloc_state_builder.dart';
-import 'package:flt_rest/blocs/shop/shop_bloc.dart';
-import 'package:flt_rest/blocs/shop/shop_state.dart';
 import 'package:flt_rest/models/shop.dart';
+import 'package:flt_rest/pages/shop_detail_page.dart';
 import 'package:flutter/material.dart';
 
-import 'pending.dart';
-import 'shop_detail.dart';
 
 class ShopItem extends StatefulWidget {
   final Shop shop;
