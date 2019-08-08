@@ -53,7 +53,6 @@ class _ApplicationState extends State<Application> {
                 GlobalWidgetsLocalizations.delegate,
               ],
               supportedLocales: globalBloc.supportedLocales(),
-
               routes: {
                 PAGE_INIT: (BuildContext context) => InitPage(),
                 PAGE_TIPS: (BuildContext context) => TipsPage(),

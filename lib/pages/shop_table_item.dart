@@ -37,17 +37,19 @@ class _ShopTableItemState extends State<ShopTableItem> {
                     child: DragTarget(
                       builder:
                           (context, List<FloorItem> candidateData, rejectedData) {
-                        if (floorItem == null || floorItem.itemNo == null) {
+                        if (floorItem == null) {
                           return Container();
                         } else {
                           if (floorItem.itemType == ItemType.table) {
+                            floorItem = null;
                             return ImageIcon(AssetImage(IMG_TABLE_URL));
                           } else if (floorItem.itemType == ItemType.door) {
+                            floorItem = null;
                             return ImageIcon(AssetImage(IMG_DOOR_URL));
                           } else {
+                            floorItem = null;
                             return Container();
                           }
-                          floorItem = null;
                         }
                       },
                       onWillAccept: (data) {

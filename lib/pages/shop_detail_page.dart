@@ -63,6 +63,10 @@ class _ShopDetailState extends State<ShopDetail>
                   : listTab().elementAt(snapshot.data),
               appBar: snapshot.data == 2
                   ? TabBar(
+                      unselectedLabelColor: Colors.white,
+                      labelColor: Colors.orange,
+                      indicatorColor: Colors.orange,
+                      indicatorSize: TabBarIndicatorSize.tab,
                       controller: _tabController,
                       tabs: listFloor.map((item) {
                         return Tab(
