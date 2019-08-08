@@ -1,4 +1,5 @@
 import 'package:flt_rest/models/shop.dart';
+import 'package:flt_rest/widgets/float_item_button.dart';
 import 'package:flutter/material.dart';
 
 import 'shop_table_item.dart';
@@ -32,6 +33,7 @@ class _ShopTablePageState extends State<ShopTablePage>
       child: TabBarView(
         controller: _tabController,
         children: listFloor.map((item) {
+          print('tab floor --- $item');
           return Center(
             child: ShopTableItem(widget.shop),
           );

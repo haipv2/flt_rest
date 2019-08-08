@@ -1,64 +1,19 @@
+import 'package:flt_rest/commons/const.dart';
+import 'package:flt_rest/models/floor_item.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  return runApp(App());
-}
-
-class App extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
-  GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      appBar: AppBar(),
-      body: Container(
-        child: Stack(
-          children: <Widget>[
-            Align(
-              child: FancyFab(),
-              alignment: Alignment.bottomRight,
-            ),
-            Container(
-              child: DragTarget(builder: (context, candidateData, rejectedData ){
-                return Container(child: Text('drag taget'));
-
-              }),
-            ),
-          ],
-
-        ),
-      ),
-    );
-  }
-}
-
-class FancyFab extends StatefulWidget {
+class FloatingItemsShop extends StatefulWidget {
   final Function() onPressed;
   final String tooltip;
   final IconData icon;
 
-  FancyFab({this.onPressed, this.tooltip, this.icon});
+  FloatingItemsShop({this.onPressed, this.tooltip, this.icon});
 
   @override
-  _FancyFabState createState() => _FancyFabState();
+  _FloatingItemsShopState createState() => _FloatingItemsShopState();
 }
 
-class _FancyFabState extends State<FancyFab>
+class _FloatingItemsShopState extends State<FloatingItemsShop>
     with SingleTickerProviderStateMixin {
   bool isOpened = false;
   AnimationController _animationController;
@@ -73,10 +28,10 @@ class _FancyFabState extends State<FancyFab>
   @override
   initState() {
     _animationController =
-    AnimationController(vsync: this, duration: Duration(milliseconds: 500))
-      ..addListener(() {
-        setState(() {});
-      });
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500))
+          ..addListener(() {
+            setState(() {});
+          });
     _animateIcon =
         Tween<double>(begin: 0.0, end: 1.0).animate(_animationController);
     _buttonColor = ColorTween(
@@ -119,22 +74,22 @@ class _FancyFabState extends State<FancyFab>
     isOpened = !isOpened;
   }
 
-  Widget add() {
-    return Container(
-      child: FloatingActionButton(
-        onPressed: null,
-        tooltip: 'Add',
-        child: Icon(Icons.add),
-      ),
-    );
-  }
-
   Widget image() {
     return Container(
       child: FloatingActionButton(
         onPressed: null,
-        tooltip: 'Image',
-        child: Icon(Icons.image),
+        tooltip: 'Table',
+        child: Draggable(
+          data: FloorItem(direction: Direction.up, itemType: ItemType.table),
+          child: ImageIcon(
+            AssetImage(IMG_TABLE_URL),
+          ),
+          feedback: Container(
+            child: ImageIcon(
+              AssetImage(IMG_TABLE_URL),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -143,12 +98,16 @@ class _FancyFabState extends State<FancyFab>
     return Container(
       child: FloatingActionButton(
         onPressed: null,
-        tooltip: 'Inbox',
+        tooltip: 'Door',
         child: Draggable(
-          child: Icon(Icons.inbox),
-          data: 1,
+          data: FloorItem(direction: Direction.up, itemType: ItemType.door),
+          child: ImageIcon(
+            AssetImage(IMG_DOOR_URL),
+          ),
           feedback: Container(
-            child: Text('drop'),
+            child: ImageIcon(
+              AssetImage(IMG_DOOR_URL),
+            ),
           ),
         ),
       ),
@@ -171,29 +130,21 @@ class _FancyFabState extends State<FancyFab>
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: <Widget>[
         Transform(
           transform: Matrix4.translationValues(
-            0.0,
-            _translateButton.value * 3.0,
-            0.0,
-          ),
-          child: add(),
-        ),
-        Transform(
-          transform: Matrix4.translationValues(
-            0.0,
             _translateButton.value * 2.0,
+            0.0,
             0.0,
           ),
           child: image(),
         ),
         Transform(
           transform: Matrix4.translationValues(
-            0.0,
             _translateButton.value,
+            0.0,
             0.0,
           ),
           child: inbox(),

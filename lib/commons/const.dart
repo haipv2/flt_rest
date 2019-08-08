@@ -14,3 +14,7 @@ const APP_VIEW_MENU_TYPE = 'fltRest_view_menu';
 //table
 const TBL_USERS = 'users';
 const TBL_SHOPS = 'shops';
+
+//images
+const IMG_TABLE_URL = 'assets/images/table.png';
+const IMG_DOOR_URL = 'assets/images/door.png';

@@ -56,22 +56,19 @@ class _ShopDetailState extends State<ShopDetail>
                       controller: _tabController,
                       children: listFloor.map((Tab tab) {
                         return Center(
-                          child: Text(tab.text),
+                          child: ShopTablePage(widget.shop),
                         );
                       }).toList(),
                     )
                   : listTab().elementAt(snapshot.data),
               appBar: snapshot.data == 2
-                  ? AppBar(
-                      title: Text(widget.shop.shopName),
-                      bottom: TabBar(
-                          controller: _tabController,
-                          tabs: listFloor.map((item) {
-                            return Tab(
-                              text: item.text,
-                            );
-                          }).toList()),
-                    )
+                  ? TabBar(
+                      controller: _tabController,
+                      tabs: listFloor.map((item) {
+                        return Tab(
+                          text: item.text,
+                        );
+                      }).toList())
                   : AppBar(
                       title: Text(widget.shop.shopName),
                     ),

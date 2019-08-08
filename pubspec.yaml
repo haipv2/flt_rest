@@ -48,4 +48,8 @@ flutter:
       - assets/images/menu12.png
       - assets/images/menu13.png
       - assets/images/menu14.png
+      - assets/images/ground.png
+      - assets/images/door.png
+      - assets/images/table.png
+      - assets/images/stair.png
 
