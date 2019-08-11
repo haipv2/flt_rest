@@ -7,6 +7,11 @@
       "1":{"title": "My Page Title",
         "desc": "Tap this button to select 'English'",
         "home": "Home Page"}
+    },
+    "homePage": {
+      "title": {
+        "bar": "Shop List"
+      }
     }
   },
   "txtMenu": "Menu",

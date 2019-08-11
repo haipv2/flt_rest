@@ -143,7 +143,8 @@ class FirestoreProvider {
 //    });
 
     List<Shop> demo = new List();
-    demo.add(Shop(shopId: 1, shopName: 'Banh Xeo Tu Dong', shopAddr: 'google'));
+
+    demo.add(Shop( shopId: 1, shopName: 'Banh Xeo Tu Dong', shopAddr: 'google'));
 //    print('-----shop length----${demo.length}');
     return demo;
   }

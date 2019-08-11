@@ -10,4 +10,6 @@ enum ShopEventType {
   start,
   changing,
   changed,
+  loading,
+  loadingDetail
 }

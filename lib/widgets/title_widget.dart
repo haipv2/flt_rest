@@ -3,7 +3,7 @@ import 'package:flt_rest/models/floor_item.dart';
 import 'package:flutter/material.dart';
 
 class FloorTile extends StatelessWidget {
-  final FloorItem floorItem;
+  final ItemFloor floorItem;
   final bool isOccupied;
   final Widget child;
   final int tileNo;

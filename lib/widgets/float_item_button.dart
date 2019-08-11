@@ -80,7 +80,7 @@ class _FloatingItemsShopState extends State<FloatingItemsShop>
         onPressed: null,
         tooltip: 'Table',
         child: Draggable(
-          data: FloorItem(direction: Direction.up, itemType: ItemType.table),
+          data: ItemFloor(direction: Direction.up, itemType: ItemType.table),
           child: ImageIcon(
             AssetImage(IMG_TABLE_URL),
           ),
@@ -100,7 +100,7 @@ class _FloatingItemsShopState extends State<FloatingItemsShop>
         onPressed: null,
         tooltip: 'Door',
         child: Draggable(
-          data: FloorItem(direction: Direction.up, itemType: ItemType.door),
+          data: ItemFloor(direction: Direction.up, itemType: ItemType.door),
           child: ImageIcon(
             AssetImage(IMG_DOOR_URL),
           ),

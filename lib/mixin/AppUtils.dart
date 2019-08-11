@@ -8,7 +8,6 @@ class AppUtils {
   void changeLanguage(String langCode, TransBloc transBloc, BlocEvent event,
       BuildContext context) {
     if (langCode == globalBloc.currentLanguage) {
-
       try {
         Scaffold.of(context).showSnackBar(SnackBar(content: Text('dataSet')));
       } catch (e) {

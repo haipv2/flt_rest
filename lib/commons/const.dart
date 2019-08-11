@@ -3,6 +3,7 @@ const String IS_FIRST_TIME = 'seen';
 final String PAGE_HOME ='/home';
 final String PAGE_TIPS ='/tips';
 final String PAGE_INIT = '/init';
+final int TAB_FLOOR = 2;
 
 const String ENGLISH_TXT ='English';
 const String ENGLISH_CODE ='en';

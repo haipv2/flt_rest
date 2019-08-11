@@ -30,11 +30,12 @@ class HomePageState extends State<HomePage> {
   GlobalKey<ScaffoldState> keyScaffoldApp = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    String txtShopList = globalBloc.text('pages.homePage.title.bar');
     return Scaffold(
       key: keyScaffoldApp,
       appBar: AppBar(
         title: Text(
-          'Shop list',
+          txtShopList,
           style: TextStyle(fontFamily: 'indie flower'),
         ),
       ),

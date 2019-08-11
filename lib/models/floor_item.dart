@@ -1,28 +1,28 @@
 import 'shop.dart';
 
-class FloorItem extends Object {
+class ItemFloor extends Object {
   Direction direction;
   int position;
   int shopId;
   ItemType itemType;
   int itemNo;
-  int floorNo;
+  int floorId;
 
-  FloorItem(
+  ItemFloor(
       {this.direction: Direction.up,
       this.position,
       this.shopId,
       this.itemType,
       this.itemNo,
-      this.floorNo});
+      this.floorId});
 
   bool operator ==(o) =>
-      o is FloorItem &&
+      o is ItemFloor &&
       o.itemNo == this.itemNo &&
       this.shopId == o.shopId &&
-      this.floorNo == o.floorNo;
+      this.floorId == o.floorId;
 
-  int get hashCode => this.shopId + this.itemNo + this.floorNo;
+  int get hashCode => this.shopId + this.itemNo + this.floorId;
 }
 
 enum ItemType { table, door, wc, stair }

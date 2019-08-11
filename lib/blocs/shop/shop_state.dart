@@ -1,29 +1,39 @@
 import 'package:flt_rest/blocs/bloc_helper/bloc_event_state.dart';
 
 class ShopState extends BlocState {
-  final bool isChanged;
-  final bool isChanging;
+  final bool isDone;
+  final bool isLoading;
+  final bool isLoadingDetail;
 
-  ShopState({this.isChanged, this.isChanging});
+  ShopState({this.isDone, this.isLoading: true, this.isLoadingDetail: true});
 
-  factory ShopState.changing() {
+  factory ShopState.start() {
     return ShopState(
-      isChanging: true,
-      isChanged: false,
+      isLoading: false,
+      isDone: false,
     );
   }
 
-  factory ShopState.start(){
+  factory ShopState.loading() {
     return ShopState(
-      isChanging: false,
-      isChanged: false,
+      isLoading: true,
+      isDone: false,
     );
   }
 
-  factory ShopState.changed() {
+  factory ShopState.loadingDetail() {
     return ShopState(
-      isChanged: true,
-      isChanging: false,
+      isLoading: false,
+      isLoadingDetail: true,
+      isDone: false,
+    );
+  }
+
+  factory ShopState.loaded() {
+    return ShopState(
+      isLoading: false,
+      isDone: true,
+      isLoadingDetail: false,
     );
   }
 }

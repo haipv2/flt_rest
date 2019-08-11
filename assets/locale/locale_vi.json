@@ -11,6 +11,11 @@
         "desc": "chontieng viet 1",
         "home": "Trang chu 1"
       }
+    },
+    "homePage": {
+      "title": {
+        "bar": "Danh sach cac shop"
+      }
     }
   },
   "txtMenu": "Chọn món",
