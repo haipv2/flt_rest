@@ -4,6 +4,7 @@ import 'package:flt_rest/blocs/shop/shop_bloc.dart';
 import 'package:flt_rest/blocs/shop/shop_event.dart';
 import 'package:flt_rest/blocs/shop/shop_state.dart';
 import 'package:flt_rest/models/shop.dart';
+import 'package:flt_rest/widgets/drawer_widget.dart';
 import 'package:flt_rest/widgets/pending.dart';
 import 'package:flt_rest/widgets/shop_bottom_bar.dart';
 import 'package:flt_rest/widgets/shop_menu.dart';
@@ -29,10 +30,9 @@ class _ShopDetailState extends State<ShopDetail>
   void initState() {
     super.initState();
     shopBloc = new ShopBloc();
-//    shopBloc.addEvent(ShopEvent(type: ShopEventType.changed));
+    shopBloc.addEvent(ShopEvent(type: ShopEventType.changed));
     _tabController =
         TabController(vsync: this, length: widget.shop.floorList.length);
-    shopBloc.addEvent(ShopEvent(type: ShopEventType.loadingDetail));
   }
 
   @override
@@ -46,7 +46,7 @@ class _ShopDetailState extends State<ShopDetail>
     return BlocEventStateBuilder<ShopState>(
       bloc: shopBloc,
       builder: (BuildContext context, ShopState state) {
-        if (state.isLoadingDetail) {
+        if (state.isLoadingDetail){
           return PendingPage();
         }
         if (state.isDone) {
@@ -58,35 +58,24 @@ class _ShopDetailState extends State<ShopDetail>
   }
 
   Widget pageContent(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     return BlocProvider<ShopBloc>(
       bloc: shopBloc,
       child: StreamBuilder(
           stream: shopBloc.streamBottomBar,
           initialData: shopBloc.defaultTabBar,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            return Container(
-                color: Colors.white,
-                child: Stack(
-                  children: <Widget>[
-//                buildShopDetailBar(),
-                    listTabBottom().elementAt(snapshot.data),
-                    Container(
-                      height: width / 10,
-                      child: Align(
-                          alignment: Alignment.centerRight,
-                          child: buildShopDetailBottomBar(snapshot)),
-                    ),
-                  ],
-                )
-
-//              drawer: ShopDrawer(),
-//              bottomNavigationBar: ShopBottomBar(
-//                shop: widget.shop,
-//                currentTab: snapshot.data,
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: listTabBottom().elementAt(snapshot.data),
+//              appBar: AppBar(
+//                title: Text(widget.shop.shopName),
 //              ),
-                );
+//              drawer: ShopDrawer(),
+              bottomNavigationBar: ShopBottomBar(
+                shop: widget.shop,
+                currentTab: snapshot.data,
+              ),
+            );
           }),
     );
   }
@@ -105,19 +94,5 @@ class _ShopDetailState extends State<ShopDetail>
         ),
       ),
     ];
-  }
-
-  Widget buildShopDetailBar() {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Text(widget.shop.shopName),
-    );
-  }
-
-  Widget buildShopDetailBottomBar(AsyncSnapshot snapshot) {
-    return ShopBottomBar(
-      shop: widget.shop,
-      currentTab: snapshot.data,
-    );
   }
 }

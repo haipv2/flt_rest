@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'language_btn.dart';
 
 class LanguageSettingWidget extends StatelessWidget with AppUtils {
-
   LanguageSettingWidget();
 
   @override
@@ -25,6 +24,12 @@ class LanguageSettingWidget extends StatelessWidget with AppUtils {
               if (state.changing) {
                 return PendingPage();
               }
+//              if (state.changed) {
+//                WidgetsBinding.instance.addPostFrameCallback((_) {
+//                  Navigator.pushNamedAndRemoveUntil(
+//                      context, PAGE_HOME, (Route<dynamic> route) => false);
+//                });
+//              }
               return Builder(builder: (BuildContext context) {
                 return Dialog(
                   backgroundColor: Color(0xffF3E2A9),
