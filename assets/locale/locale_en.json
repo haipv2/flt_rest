@@ -1,12 +1,16 @@
 {
   "pages": {
     "tips": {
-      "0":{"title": "My Page Title",
+      "0": {
+        "title": "My Page Title",
         "desc": "Tap this button to select 'English'",
-        "home": "Home Page"},
-      "1":{"title": "My Page Title",
+        "home": "Home Page"
+      },
+      "1": {
+        "title": "My Page Title",
         "desc": "Tap this button to select 'English'",
-        "home": "Home Page"}
+        "home": "Home Page"
+      }
     },
     "homePage": {
       "title": {
@@ -16,8 +20,10 @@
   },
   "txtMenu": "Menu",
   "txtBook": "Book",
-  "txtLanguage":"Language",
-  "txtBack":"Back"
-
-
+  "txtLanguage": "Language",
+  "txtBack": "Back",
+  "menu": {
+    "dishes": "Dishes",
+    "drink": "Drink"
+  }
 }

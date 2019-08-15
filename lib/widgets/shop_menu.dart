@@ -1,3 +1,4 @@
+import 'package:flt_rest/blocs/global_bloc.dart';
 import 'package:flt_rest/models/food.dart';
 import 'package:flt_rest/models/menu.dart';
 import 'package:flt_rest/models/shop.dart';
@@ -17,15 +18,60 @@ class ShopMenu extends StatefulWidget {
   _ShopMenuState createState() => _ShopMenuState();
 }
 
-class _ShopMenuState extends State<ShopMenu> {
+class _ShopMenuState extends State<ShopMenu>
+    with SingleTickerProviderStateMixin {
   final PageController _backgroundPageController = new PageController();
   Color _backColor = Color.fromRGBO(240, 232, 223, 1.0);
   bool showQuantity = false;
+  TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Stack(children: <Widget>[
+    return Scaffold(
+      appBar: TabBar(
+        unselectedLabelColor: Colors.grey,
+        labelColor: Colors.orange,
+        indicatorColor: Colors.orange,
+        indicatorSize: TabBarIndicatorSize.tab,
+        controller: _tabController,
+        tabs: _buildTabLabelMenu(),
+      ),
+      body: TabBarView(
+        children: _buildTabMenuContent(),
+        controller: _tabController,
+      ),
+    );
+  }
+
+  void _showQuantityWidget() {
+    setState(() {
+      showQuantity = true;
+    });
+  }
+
+  List<Tab> _buildTabLabelMenu() {
+    String dishes = globalBloc.text('menu.dishes');
+    String drink = globalBloc.text('menu.drink');
+    List<Tab> result = [
+      Tab(
+        text: dishes,
+      ),
+      Tab(
+        text: drink,
+      ),
+    ];
+    return result;
+  }
+
+  _buildTabMenuContent() {
+    return <Widget>[
+      Stack(children: <Widget>[
         GestureDetector(
           onTap: _showQuantityWidget,
           child: GridView.builder(
@@ -77,12 +123,9 @@ class _ShopMenuState extends State<ShopMenu> {
               )
             : Container(),
       ]),
-    );
-  }
-
-  void _showQuantityWidget() {
-    setState(() {
-      showQuantity = true;
-    });
+      Container(
+        child: Text('Drink some thing'),
+      ),
+    ];
   }
 }

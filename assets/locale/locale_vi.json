@@ -21,5 +21,9 @@
   "txtMenu": "Chọn món",
   "txtBook": "Đặt chỗ",
   "txtLanguage": "Ngôn ngữ",
-  "txtBack": "Quay lại"
+  "txtBack": "Quay lại",
+  "menu":{
+    "dishes":"Đồ Ăn",
+    "drink": "Đồ Uống"
+  }
 }
