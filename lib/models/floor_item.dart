@@ -7,6 +7,7 @@ class ItemFloor extends Object {
   ItemType itemType;
   int itemNo;
   int floorId;
+  int itemPosition;
 
   ItemFloor(
       {this.direction: Direction.up,

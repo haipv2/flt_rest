@@ -16,6 +16,7 @@ class ShopFloorDetailPage extends StatefulWidget {
 
 class _ShopFloorDetailPageState extends State<ShopFloorDetailPage> {
   ItemFloor floorItem;
+  Set<int> itemPositionArr = new Set();
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +36,45 @@ class _ShopFloorDetailPageState extends State<ShopFloorDetailPage> {
                     decoration: BoxDecoration(
                         border: Border.all(width: 0.1, color: Colors.black)),
                     child: DragTarget(
-                      builder:
-                          (context, List<ItemFloor> candidateData, rejectedData) {
+                      builder: (context, List<ItemFloor> candidateData,
+                          rejectedData) {
                         if (floorItem == null) {
-                          return Container();
+                          return Container(
+                            child: Text(
+                              '$i',
+                              style: TextStyle(color: Colors.deepOrange),
+                            ),
+                          );
                         } else {
                           if (floorItem.itemType == ItemType.table) {
                             floorItem = null;
-                            return ImageIcon(AssetImage(IMG_TABLE_URL));
+                            return Draggable(
+                              data: ItemFloor(
+                                  direction: Direction.up,
+                                  itemType: ItemType.table),
+                              child: Center(
+                                child: Stack(
+                                  children: <Widget>[
+                                    Center(
+                                        child: ImageIcon(
+                                            AssetImage(IMG_TABLE_URL))),
+                                    Center(
+                                        child: Text(
+                                      '2',
+                                      style: TextStyle(
+                                          color: Colors.red, fontSize: 20),
+                                    ))
+                                  ],
+                                ),
+                              ),
+                              feedback: Container(
+                                child: ImageIcon(AssetImage(IMG_TABLE_URL)),
+                              ),
+                              onDragCompleted: () {
+                                print('remove $i');
+                                itemPositionArr.remove(i);
+                              },
+                            );
                           } else if (floorItem.itemType == ItemType.door) {
                             floorItem = null;
                             return ImageIcon(AssetImage(IMG_DOOR_URL));
@@ -53,10 +85,17 @@ class _ShopFloorDetailPageState extends State<ShopFloorDetailPage> {
                         }
                       },
                       onWillAccept: (data) {
+//                        if (itemPositionArr.contains(i)) {
+//                          return false;
+//                        }
                         return true;
                       },
                       onAccept: (data) {
-                        floorItem = data;
+//                          if (itemPositionArr.contains(i)){
+//                            return;
+//                          }
+                          floorItem = data;
+                          itemPositionArr.add(i);
                       },
                     ),
                   );
