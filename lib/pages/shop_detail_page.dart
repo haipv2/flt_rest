@@ -90,7 +90,7 @@ class _ShopDetailState extends State<ShopDetail>
       ),
       Container(
         child: Center(
-          child: ShopTablePage(widget.shop),
+          child: ShopTablePage(shop: widget.shop),
         ),
       ),
     ];

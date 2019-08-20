@@ -8,7 +8,7 @@ import 'shop_floor_detail_page.dart';
 class ShopTablePage extends StatefulWidget {
   final Shop shop;
 
-  ShopTablePage(this.shop);
+  ShopTablePage({this.shop});
 
   @override
   _ShopTablePageState createState() => _ShopTablePageState();
@@ -71,7 +71,7 @@ class _ShopTablePageState extends State<ShopTablePage>
   List<Widget> buildTabContent() {
     List<Widget> result = [];
     for (var floor in widget.shop.floorList) {
-      result.add(ShopFloorDetailPage(floor));
+      result.add(ShopFloorDetailPage(floor: floor, shop: widget.shop,));
     }
     return result;
   }
